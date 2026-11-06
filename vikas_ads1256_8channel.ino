@@ -9,6 +9,7 @@
 
 #include <ADS1256.h>
 #include <SPI.h>
+#include "SecondaryCalibration.h"
 
 // Construct and init ADS1256 object
 float vRef = 2.5*100000;
@@ -137,9 +138,9 @@ Serial.println();
   adc.setChannel(0,1); // switch back to MUX AIN0 and AIN1
   sensor4 = adc.readCurrentChannel(); // DOUT arriving here are from MUX AIN6 and AIN7
 
-  sensor2 = map(sensor2, -4.9, 0, 2.5, 0);
-  sensor3 = map(sensor3, -4.9, 0, 2.5, 0);
-  sensor4 = map(sensor4, -4.9, 0, 2.5, 0);
+  sensor2 = ads1256_calibration::secondaryChannel(sensor2);
+  sensor3 = ads1256_calibration::secondaryChannel(sensor3);
+  sensor4 = ads1256_calibration::secondaryChannel(sensor4);
 
   //print the result.
   Serial.print(sensor1/100000, 5);

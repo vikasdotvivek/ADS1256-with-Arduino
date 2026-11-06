@@ -1,0 +1,42 @@
+name: Floating-point calibration tests
+on:
+  workflow_dispatch:
+  push:
+    branches: [review/code-improvements-2026-11-06]
+    paths:
+      - 'SecondaryCalibration.h'
+      - 'vikas_ads1256_8channel.ino'
+      - 'tests/**'
+      - '.github/workflows/calibration-tests.yml'
+  pull_request:
+    paths:
+      - 'SecondaryCalibration.h'
+      - 'vikas_ads1256_8channel.ino'
+      - 'tests/**'
+      - '.github/workflows/calibration-tests.yml'
+permissions:
+  contents: read
+jobs:
+  host-test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+      - name: Compile and test the pure calibration helper
+        shell: bash
+        run: |
+          set -euo pipefail
+          g++ -std=c++11 -Wall -Wextra -Werror -pedantic -fsanitize=undefined -fno-sanitize-recover=all tests/test_secondary_calibration.cpp -o "$RUNNER_TEMP/test-secondary-calibration"
+          "$RUNNER_TEMP/test-secondary-calibration"
+      - name: Check sketch integration without running hardware code
+        shell: python
+        run: |
+          from pathlib import Path
+          text = Path('vikas_ads1256_8channel.ino').read_text(encoding='utf-8')
+          assert '#include "SecondaryCalibration.h"' in text
+          for channel in (2, 3, 4):
+              assert f'sensor{channel} = ads1256_calibration::secondaryChannel(sensor{channel});' in text
+              assert f'map(sensor{channel},' not in text
+          assert 'Serial.print(sensor1/100000, 5);' in text
+          assert 'Serial.println(sensor4/100000, 5);' in text
+          print('PASS: sketch uses the tested helper; serial scaling retained')
