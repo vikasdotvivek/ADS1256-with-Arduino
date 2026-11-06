@@ -2,19 +2,45 @@
   "generator": "repository-static-triage",
   "version": "1.0",
   "repository": "vikasdotvivek/ADS1256-with-Arduino",
-  "revision": "bf5d4ff8f96b8a5f41bfa348a521fda3dd1674f4",
-  "tracked_files": 4,
+  "revision": "b03f0cf541ef6f5d1b862dbcde20fb02b3dff092",
+  "tracked_files": 10,
   "scanned": [
     {
+      "path": "SecondaryCalibration.h",
+      "lines": 18,
+      "bytes": 625
+    },
+    {
+      "path": "tests/test_secondary_calibration.cpp",
+      "lines": 54,
+      "bytes": 1846
+    },
+    {
       "path": "vikas_ads1256_8channel.ino",
-      "lines": 153,
-      "bytes": 4646
+      "lines": 154,
+      "bytes": 4731
     }
   ],
   "skipped": [
     {
+      "path": ".github/workflows/calibration-tests.yml",
+      "reason": "non-source format; content not audited"
+    },
+    {
       "path": ".github/workflows/code-improvement-review.yml",
       "reason": "non-source format; content not audited"
+    },
+    {
+      "path": ".review/STATIC_REVIEW.md",
+      "reason": "generated/vendor/review path"
+    },
+    {
+      "path": ".review/VERIFIED_FIXES.md",
+      "reason": "generated/vendor/review path"
+    },
+    {
+      "path": ".review/static-review.json",
+      "reason": "generated/vendor/review path"
     },
     {
       "path": "CODE_IMPROVEMENTS.md",
@@ -26,40 +52,11 @@
     }
   ],
   "manifests": [],
-  "conventional_test_paths": [],
-  "findings": [
-    {
-      "rule": "arduino-map-fractions",
-      "priority": "P1",
-      "path": "vikas_ads1256_8channel.ino",
-      "line": 140,
-      "title": "Fractional arguments passed to Arduino integer map",
-      "recommendation": "Verify the active map overload and physical units; test floating-point interpolation endpoints and midpoint before altering calibration.",
-      "status": "review-required",
-      "source": "https://github.com/vikasdotvivek/ADS1256-with-Arduino/blob/bf5d4ff8f96b8a5f41bfa348a521fda3dd1674f4/vikas_ads1256_8channel.ino#L140"
-    },
-    {
-      "rule": "arduino-map-fractions",
-      "priority": "P1",
-      "path": "vikas_ads1256_8channel.ino",
-      "line": 141,
-      "title": "Fractional arguments passed to Arduino integer map",
-      "recommendation": "Verify the active map overload and physical units; test floating-point interpolation endpoints and midpoint before altering calibration.",
-      "status": "review-required",
-      "source": "https://github.com/vikasdotvivek/ADS1256-with-Arduino/blob/bf5d4ff8f96b8a5f41bfa348a521fda3dd1674f4/vikas_ads1256_8channel.ino#L141"
-    },
-    {
-      "rule": "arduino-map-fractions",
-      "priority": "P1",
-      "path": "vikas_ads1256_8channel.ino",
-      "line": 142,
-      "title": "Fractional arguments passed to Arduino integer map",
-      "recommendation": "Verify the active map overload and physical units; test floating-point interpolation endpoints and midpoint before altering calibration.",
-      "status": "review-required",
-      "source": "https://github.com/vikasdotvivek/ADS1256-with-Arduino/blob/bf5d4ff8f96b8a5f41bfa348a521fda3dd1674f4/vikas_ads1256_8channel.ino#L142"
-    }
+  "conventional_test_paths": [
+    "tests/test_secondary_calibration.cpp"
   ],
-  "total_findings": 3,
+  "findings": [],
+  "total_findings": 0,
   "findings_omitted": 0,
   "execution": "No repository code, tests, builds or hardware were executed."
 }
