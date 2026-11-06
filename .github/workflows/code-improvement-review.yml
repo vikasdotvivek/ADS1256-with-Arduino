@@ -1,0 +1,10 @@
+name: Code improvement triage
+on:
+  workflow_dispatch:
+  push:
+    branches: [review/code-improvements-2026-11-06]
+    paths-ignore: [.review/STATIC_REVIEW.md, .review/static-review.json]
+permissions: {contents: write}
+jobs:
+  review:
+    uses: vikasdotvivek/PWM-PID-Colibri-VF50/.github/workflows/repository-review-reusable.yml@f4cb6f754f7f28846de5369b3ad89998a34b6d93
